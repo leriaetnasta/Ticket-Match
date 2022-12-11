@@ -1,6 +1,7 @@
 package com.example.ticketmatch.repositories;
 
+import com.example.ticketmatch.entities.Match;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MatchRepository extends JpaRepository<Math,Long> {
+public interface MatchRepository extends JpaRepository<Match,Long> {
 }

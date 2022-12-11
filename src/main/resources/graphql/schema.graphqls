@@ -1,0 +1,33 @@
+
+type Query{
+    userTickets : [Ticket],
+    ticketByID(id:ID):Ticket
+}
+type Ticket{
+    id : ID
+    reference: String
+    prix:Float
+    match:Match
+    status:Status
+    achatTicket:[AchatTicket]
+}
+enum Status{
+    ACTIVE,
+    DESACTIVE
+}
+type Match{
+    id:ID
+    reference:String
+    date:Float
+    lieu:String
+    equipe1:String
+    equipe2:String
+    ticket:[Ticket]
+}
+type AchatTicket{
+    id:ID
+    timestamp:Float
+    prix:Float
+    quatite:Int
+    ticket:Ticket
+}

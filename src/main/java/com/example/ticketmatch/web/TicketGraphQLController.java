@@ -1,6 +1,7 @@
 package com.example.ticketmatch.web;
 
 import com.example.ticketmatch.entities.AchatTicket;
+import com.example.ticketmatch.entities.Match;
 import com.example.ticketmatch.entities.Ticket;
 import com.example.ticketmatch.repositories.TicketRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -12,6 +13,7 @@ import java.util.List;
 @Controller
 public class TicketGraphQLController {
     private TicketRepository ticketRepository;
+    private
 
     public TicketGraphQLController(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
@@ -26,6 +28,9 @@ public class TicketGraphQLController {
         return ticketRepository.findById(id).get();
     }
 
+    public Ticket ajoutMatch(AddMatchRequestDTO match){
 
+    }
 
 }
+

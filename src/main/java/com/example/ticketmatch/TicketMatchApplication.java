@@ -1,6 +1,6 @@
 package com.example.ticketmatch;
 
-import com.example.ticketmatch.service.TicketService;
+import com.example.ticketmatch.service.TicketServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,7 @@ public class TicketMatchApplication {
         SpringApplication.run(TicketMatchApplication.class, args);
     }
     @Bean
-    CommandLineRunner start(TicketService ticketService){
+    CommandLineRunner start(TicketServiceImpl ticketService){
         return args -> {
             ticketService.loadData();
         };

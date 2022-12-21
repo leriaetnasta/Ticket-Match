@@ -1,15 +1,31 @@
 
 type Query{
     userTickets : [Ticket],
-    ticketByID(id:ID):Ticket
+    ticketByID(id:ID):Ticket,
+    userMatchs: [Match],
+}
+type Mutation{
+    saveMatch(addMatchRequestDTO:AddMatchRequestDTO):Match
+    achatTicket(addTicketRequestDTO:AddTicketRequestDTO) : Ticket
+    modificationTicket(ticketId:ID):Ticket
+
+}
+input AddMatchRequestDTO{
+    date:String
+    lieu:String
+    equipe1:String
+    equipe2:String
+}
+input AddTicketRequestDTO{
+    matchId : ID
+    prix: Float
 }
 type Ticket{
-    id : ID
-    reference: String
+    id:ID
     prix:Float
     match:Match
     status:Status
-    achatTicket:[AchatTicket]
+    reference:String
 }
 enum Status{
     ACTIVE,
@@ -18,16 +34,9 @@ enum Status{
 type Match{
     id:ID
     reference:String
-    date:Float
+    date:String
     lieu:String
     equipe1:String
     equipe2:String
     ticket:[Ticket]
-}
-type AchatTicket{
-    id:ID
-    timestamp:Float
-    prix:Float
-    quatite:Int
-    ticket:Ticket
 }

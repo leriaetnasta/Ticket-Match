@@ -18,12 +18,10 @@ public class Ticket {
     @Column(name = "reference", unique = true, length = 16)
     private String reference;
     private double prix;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne
     private Match match;
-    @OneToMany(mappedBy = "ticket")
-    private List<AchatTicket> achatTickets;
 
 
 }

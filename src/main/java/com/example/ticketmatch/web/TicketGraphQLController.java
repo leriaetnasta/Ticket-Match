@@ -20,25 +20,21 @@ import java.util.List;
 
 @Controller
 public class TicketGraphQLController {
-    private TicketRepository ticketRepository;
     private TicketService ticketService;
     private MatchService matchService;
-    private MatchRepository matchRepository;
 
-    public TicketGraphQLController(MatchRepository matchRepository,TicketRepository ticketRepository,TicketService ticketService,MatchService matchService) {
-        this.ticketRepository = ticketRepository;
+    public TicketGraphQLController(TicketService ticketService,MatchService matchService) {
         this.matchService=matchService;
         this.ticketService=ticketService;
-        this.matchRepository=matchRepository;
     }
 
     @QueryMapping
     public List<Ticket> userTickets(){
-        return ticketRepository.findAll();
+        return this.ticketService.userTickets();
     }
     @QueryMapping
     public Ticket ticketByID(@Argument Long id){
-        return ticketRepository.findById(id).get();
+        return this.ticketService.ticketByID(id);
     }
     @MutationMapping
     public Match saveMatch(@Argument AddMatchRequestDTO addMatchRequestDTO) throws ParseException {
@@ -50,7 +46,7 @@ public class TicketGraphQLController {
     }
     @QueryMapping
     public List<Match> userMatchs(){
-        return matchRepository.findAll();
+        return matchService.userMatchs();
     }
 
     @MutationMapping

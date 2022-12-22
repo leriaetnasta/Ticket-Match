@@ -11,6 +11,7 @@ import com.example.ticketmatch.repositories.TicketRepository;
 import com.example.ticketmatch.service.interfaces.TicketService;
 import jakarta.transaction.Transactional;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -96,6 +97,16 @@ public class TicketServiceImpl implements TicketService {
                 .orElseThrow(() -> new TicketNotFoundException());
         ticket.setStatus(Status.ACTIVE);
         return ticketRepository.save(ticket);
+    }
+    @Override
+
+    public List<Ticket> userTickets(){
+        return ticketRepository.findAll();
+    }
+
+    @Override
+    public Ticket ticketByID(@Argument Long id){
+        return ticketRepository.findById(id).get();
     }
 
 

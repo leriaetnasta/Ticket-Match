@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,6 +19,10 @@ public class MatchServiceImpl implements MatchService {
 
     public MatchServiceImpl(MatchRepository matchRepository) {
         this.matchRepository = matchRepository;
+    }
+    @Override
+    public List<Match> userMatchs(){
+        return matchRepository.findAll();
     }
 
     @Override

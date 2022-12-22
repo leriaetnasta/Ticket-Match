@@ -15,6 +15,7 @@ input AddMatchRequestDTO{
     lieu:String
     equipe1:String
     equipe2:String
+    nombreTicket:Float
 }
 input AddTicketRequestDTO{
     matchId : ID
@@ -39,4 +40,6 @@ type Match{
     equipe1:String
     equipe2:String
     ticket:[Ticket]
+    nombreTicket:Float
+
 }

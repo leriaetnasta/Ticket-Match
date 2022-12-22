@@ -6,6 +6,7 @@ import com.example.ticketmatch.entities.Match;
 import com.example.ticketmatch.entities.Ticket;
 import com.example.ticketmatch.exceptions.MatchNotFoundException;
 import com.example.ticketmatch.exceptions.TicketNotFoundException;
+import com.example.ticketmatch.exceptions.TicketUnavailableException;
 import org.springframework.graphql.data.method.annotation.Argument;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public interface TicketService {
     void loadData() throws IOException, ParseException;
-    public Ticket achatTicket(AddTicketRequestDTO addTicketRequestDTO) throws MatchNotFoundException;
+    public Ticket achatTicket(AddTicketRequestDTO addTicketRequestDTO) throws MatchNotFoundException, TicketUnavailableException;
 
     Ticket activationTicket(Long ticketId) throws TicketNotFoundException;
 

@@ -16,4 +16,5 @@ public class AddMatchRequestDTO {
     private String lieu;
     private String equipe1;
     private String equipe2;
+    private int nombreTicket;
 }

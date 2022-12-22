@@ -12,7 +12,7 @@ public class TicketMatchApplication {
     public static void main(String[] args) {
         SpringApplication.run(TicketMatchApplication.class, args);
     }
-    @Bean
+    //@Bean
     CommandLineRunner start(TicketServiceImpl ticketService){
         return args -> {
             ticketService.loadData();

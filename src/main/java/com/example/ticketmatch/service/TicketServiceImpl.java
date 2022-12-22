@@ -6,6 +6,7 @@ import com.example.ticketmatch.entities.Ticket;
 import com.example.ticketmatch.enums.Status;
 import com.example.ticketmatch.exceptions.MatchNotFoundException;
 import com.example.ticketmatch.exceptions.TicketNotFoundException;
+import com.example.ticketmatch.exceptions.TicketUnavailableException;
 import com.example.ticketmatch.repositories.MatchRepository;
 import com.example.ticketmatch.repositories.TicketRepository;
 import com.example.ticketmatch.service.interfaces.TicketService;
@@ -50,6 +51,7 @@ public class TicketServiceImpl implements TicketService {
                     .equipe1(ligne[4])
                     .equipe2(ligne[5])
                     .reference("M_"+i+new Random().nextInt(10))
+                    .nombreTicket(1000)
                     .build();
             matchRepository.save(match);
     }
@@ -60,6 +62,7 @@ public class TicketServiceImpl implements TicketService {
         ticket.setPrix(3000);
         ticket.setStatus(Status.DESACTIVE);
         ticket.setReference("T_"+id+new Random().nextInt(1000));
+            match.setNombreTicket(match.getNombreTicket()-1);
         ticketRepository.save(ticket);
 
         });
@@ -70,6 +73,7 @@ public class TicketServiceImpl implements TicketService {
             ticket.setPrix(3000);
             ticket.setStatus(Status.ACTIVE);
             ticket.setReference("T_"+id+new Random().nextInt(1000));
+            match.setNombreTicket(match.getNombreTicket()-1);
             ticketRepository.save(ticket);
 
         });
@@ -77,17 +81,22 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket achatTicket(AddTicketRequestDTO addTicketRequestDTO) throws MatchNotFoundException {
+    public Ticket achatTicket(AddTicketRequestDTO addTicketRequestDTO) throws MatchNotFoundException, TicketUnavailableException {
+
         Match match = matchRepository.findById(addTicketRequestDTO.getMatchId())
                 .orElseThrow(
                         () -> new MatchNotFoundException()
                 );
+        if(match.getNombreTicket()==0){
+            throw new TicketUnavailableException();
+        }
         Ticket ticket=Ticket.builder()
                 .reference(UUID.randomUUID().toString().substring(1,16))
                 .prix(addTicketRequestDTO.getPrix())
                 .status(Status.DESACTIVE)
                 .match(match)
                 .build();
+        match.setNombreTicket(match.getNombreTicket()-1);
         ticketRepository.save(ticket);
         return ticket;
     }

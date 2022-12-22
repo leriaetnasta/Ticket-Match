@@ -11,19 +11,20 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-@Entity @Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Entity @Data @NoArgsConstructor @AllArgsConstructor @Builder @Table(name="match_table")
+
 public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "reference", unique = true)
+    @Column( unique = true)
     private String reference;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private String lieu;
     private String equipe1;
     private String equipe2;
     @OneToMany(mappedBy = "match")
     private List<Ticket> ticket;
+    private int nombreTicket;
+
 }

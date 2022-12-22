@@ -6,6 +6,7 @@ import com.example.ticketmatch.entities.Match;
 import com.example.ticketmatch.entities.Ticket;
 import com.example.ticketmatch.exceptions.MatchNotFoundException;
 import com.example.ticketmatch.exceptions.TicketNotFoundException;
+import com.example.ticketmatch.exceptions.TicketNumberException;
 import com.example.ticketmatch.exceptions.TicketUnavailableException;
 import com.example.ticketmatch.repositories.MatchRepository;
 import com.example.ticketmatch.repositories.TicketRepository;
@@ -38,7 +39,7 @@ public class TicketGraphQLController {
         return this.ticketService.ticketByID(id);
     }
     @MutationMapping
-    public Match saveMatch(@Argument AddMatchRequestDTO addMatchRequestDTO) throws ParseException, TicketUnavailableException {
+    public Match saveMatch(@Argument AddMatchRequestDTO addMatchRequestDTO) throws ParseException, TicketUnavailableException, TicketNumberException {
         return matchService.saveMatch(addMatchRequestDTO);
     }
     @MutationMapping

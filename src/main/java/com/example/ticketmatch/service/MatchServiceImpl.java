@@ -2,6 +2,7 @@ package com.example.ticketmatch.service;
 
 import com.example.ticketmatch.dto.AddMatchRequestDTO;
 import com.example.ticketmatch.entities.Match;
+import com.example.ticketmatch.exceptions.TicketNumberException;
 import com.example.ticketmatch.exceptions.TicketUnavailableException;
 import com.example.ticketmatch.repositories.MatchRepository;
 import com.example.ticketmatch.service.interfaces.MatchService;
@@ -28,10 +29,10 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public Match saveMatch(AddMatchRequestDTO addMatchRequestDTO) throws ParseException, TicketUnavailableException {
+    public Match saveMatch(AddMatchRequestDTO addMatchRequestDTO) throws ParseException, TicketNumberException {
         String s=addMatchRequestDTO.getDate();
         if(addMatchRequestDTO.getNombreTicket()>2022||addMatchRequestDTO.getNombreTicket()<0){
-            throw new TicketUnavailableException();
+            throw new TicketNumberException();
         }
         Match match=Match.builder()
                 .date(new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(s)) //to be fixed

@@ -117,6 +117,10 @@ public class TicketServiceImpl implements TicketService {
     public Ticket ticketByID(@Argument Long id){
         return ticketRepository.findById(id).get();
     }
-
+    @Override
+    public List<Ticket> ticketParMatch(@Argument Long id) throws MatchNotFoundException {
+        Match match=this.matchRepository.findById(id).orElseThrow(() -> new MatchNotFoundException());
+        return match.getTicket();
+    }
 
 }

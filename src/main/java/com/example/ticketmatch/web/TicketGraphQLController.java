@@ -55,5 +55,9 @@ public class TicketGraphQLController {
     private Ticket modificationTicket(@Argument Long ticketId) throws TicketNotFoundException {
         return ticketService.activationTicket(ticketId);
     }
+    @QueryMapping
+    private List<Ticket> ticketParMatch(@Argument Long matchId) throws MatchNotFoundException {
+        return ticketService.ticketParMatch(matchId);
+    }
 }
 

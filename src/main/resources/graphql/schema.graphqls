@@ -3,6 +3,9 @@ type Query{
     userTickets : [Ticket],
     ticketByID(id:ID):Ticket,
     userMatchs: [Match],
+    ticketParMatch(matchId:ID):[Ticket]
+
+
 }
 type Mutation{
     saveMatch(addMatchRequestDTO:AddMatchRequestDTO):Match

@@ -22,4 +22,6 @@ public interface TicketService {
     List<Ticket> userTickets();
 
     Ticket ticketByID(@Argument Long id);
+
+    List<Ticket> ticketParMatch(@Argument Long id) throws MatchNotFoundException;
 }
